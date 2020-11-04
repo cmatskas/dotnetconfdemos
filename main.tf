@@ -38,5 +38,5 @@ resource "azurerm_mssql_database" "test" {
   max_size_gb    = 4
   read_scale     = true
   sku_name       = "BC_Gen5_2"
-  zone_redundant = true
+  zone_redundant = false
 }
