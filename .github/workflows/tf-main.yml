@@ -39,7 +39,7 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -out plan.out -var 'admin_username=${{steps.getKVSecrets.output.tf-sql-username}}' -var 'admin_password=${{steps.getKVSecrets.outputs.tf-sql-password}}'
+        run: terraform plan -var 'admin_username=${{steps.getKVSecrets.output.tf-sql-username}}' -var 'admin_password=${{steps.getKVSecrets.outputs.tf-sql-password}}'
         env:
           ARM_CLIENT_ID : ${{secrets.ARM_CLIENT_ID}}     
           ARM_CLIENT_SECRET : ${{secrets.ARM_CLIENT_SECRET}}
@@ -49,7 +49,7 @@ jobs:
       
       - name: Terraform Apply
         id: apply
-        run: terraform apply plan.out -var 'admin_username=${{steps.getKVSecrets.output.tf-sql-username}}' -var 'admin_password=${{steps.getKVSecrets.outputs.tf-sql-password}}'
+        run: terraform apply --auto-approve -var 'admin_username=${{steps.getKVSecrets.output.tf-sql-username}}' -var 'admin_password=${{steps.getKVSecrets.outputs.tf-sql-password}}'
         env:
           ARM_CLIENT_ID : ${{secrets.ARM_CLIENT_ID}}     
           ARM_CLIENT_SECRET : ${{secrets.ARM_CLIENT_SECRET}}    
