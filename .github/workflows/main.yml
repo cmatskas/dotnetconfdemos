@@ -42,3 +42,7 @@ jobs:
           template: ./azuredeploy.json
           # Supply deployment parameter values.
           parameters: ./azuredeploy.parameters.kv.json
+
+      - name: Azure logout
+          run: |
+            az logout
