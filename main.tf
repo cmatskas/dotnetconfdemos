@@ -18,7 +18,6 @@ variable "admin_password" {
 }
 
 provider "azurerm" {
-  version = "=1.44.0"
   subscription_id = "d8011108-23b2-40d8-8bc4-1f3f77abe795"
   features {}
 }
