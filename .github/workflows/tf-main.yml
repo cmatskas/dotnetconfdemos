@@ -39,13 +39,9 @@ jobs:
         id: init
         run: terraform init
 
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
-
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color
+        run: terraform plan -var 'admin_username=${{steps.getKVSecrets.outputs.tf-sql-username}}' -var 'admin_password=${{steps.getKVSecrets.outputs.tf-sql-password}}'
         continue-on-error: false
       
       - name: Terroform Apply
