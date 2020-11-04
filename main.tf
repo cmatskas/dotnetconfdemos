@@ -17,10 +17,6 @@ variable "admin_password" {
   description = "Password must meet Azure complexity requirements"
 }
 
-variable "client_secret" {
-    type = string
-}
-
 provider "azurerm" {
   features {}
 }

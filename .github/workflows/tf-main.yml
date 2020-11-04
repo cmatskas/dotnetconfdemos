@@ -25,12 +25,12 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Azure key vault - Get Secrets
-        uses: Azure/get-keyvault-secrets@v1
-        with:
-          keyvault: cmdeploymentdemo
-          secrets: 'tf-sql-username, tf-sql-password, clientsecret'
-        id: getKVSecrets
+    #  - name: Azure key vault - Get Secrets
+     #   uses: Azure/get-keyvault-secrets@v1
+      #  with:
+      #    keyvault: cmdeploymentdemo
+      #    secrets: 'tf-sql-username, tf-sql-password, clientsecret'
+      #  id: getKVSecrets
         
       - uses: hashicorp/setup-terraform@v1
       - name: Terraform Init
@@ -39,23 +39,23 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -var 'admin_username=${{steps.getKVSecrets.outputs.tf-sql-username}}' -var 'admin_password=${{steps.getKVSecrets.outputs.tf-sql-password}}' -var 'client_secret=${{steps.getKVSecrets.outputs.clientsecret}}'
+        run: terraform plan -var 'admin_username=sqlgod' -var 'admin_password=Test1234567!'
         env:
           ARM_CLIENT_ID : ${{secrets.ARM_CLIENT_ID}}     
-          ARM_CLIENT_SECRET : ${{steps.getKVSecrets.outputs.clientsecret}}     
+          ARM_CLIENT_SECRET : ${{secrets.ARM_CLIENT_SECRET}}
           ARM_SUBSCRIPTION_ID : ${{secrets.ARM_SUBSCRIPTION_ID}}     
           ARM_TENANT_ID : ${{secrets.ARM_TENANT_ID}}
         continue-on-error: false
       
       - name: Terroform Apply
         id: apply
-        run: terraform apply -auto-approve -var 'admin_username=${{steps.getKVSecrets.outputs.tf-sql-username}}' -var 'admin_password=${{steps.getKVSecrets.outputs.tf-sql-password}}' -var 'client_secret=${{steps.getKVSecrets.outputs.clientsecret}}'
+        run: terraform apply -auto-approve -var 'admin_username=sqlgod' -var 'admin_password=Test1234567!'
         env:
           ARM_CLIENT_ID : ${{secrets.ARM_CLIENT_ID}}     
-          ARM_CLIENT_SECRET : ${{steps.getKVSecrets.outputs.clientsecret}}     
+          ARM_CLIENT_SECRET : ${{secrets.ARM_CLIENT_SECRET}}    
           ARM_SUBSCRIPTION_ID : ${{secrets.ARM_SUBSCRIPTION_ID}}     
           ARM_TENANT_ID : ${{secrets.ARM_TENANT_ID}}
-          
+
       - name: Azure logout
         run: az logout
 
