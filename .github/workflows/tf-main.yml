@@ -36,6 +36,13 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
+        
+      - name: Setup Environment variables
+        env:
+          ARM_CLIENT_ID : ${{secrets.ARM_CLIENT_ID}}     
+          ARM_CLIENT_SECRET : ${{steps.getKVSecrets.outputs.clientsecret}}     
+          ARM_SUBSCRIPTION_ID : ${{secrets.ARM_SUBSCRIPTION_ID}}     
+          ARM_TENANT_ID : ${{secrets.ARM_TENANT_ID}}
 
       - name: Terraform Plan
         id: plan
@@ -45,11 +52,6 @@ jobs:
       - name: Terroform Apply
         id: apply
         run: terraform apply -auto-approve -var 'admin_username=${{steps.getKVSecrets.outputs.tf-sql-username}}' -var 'admin_password=${{steps.getKVSecrets.outputs.tf-sql-password}}' -var 'client_secret=${{steps.getKVSecrets.outputs.clientsecret}}'
-        env:
-          ARM_CLIENT_ID : ${{secrets.ARM_CLIENT_ID}}     
-          ARM_CLIENT_SECRET : ${{steps.getKVSecrets.outputs.clientsecret}}     
-          ARM_SUBSCRIPTION_ID : ${{secrets.ARM_SUBSCRIPTION_ID}}     
-          ARM_TENANT_ID : ${{secrets.ARM_TENANT_ID}}
         
       - name: Azure logout
         run: az logout
