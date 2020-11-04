@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location":{
-            "value": "West Europe"
+            "value": "East US"
         },
         "serverName": {
             "value": "cmspdemosqlserver"
@@ -11,7 +11,7 @@
         "administratorLogin": {
             "reference": {
                 "keyVault": {
-                    "id": "/subscriptions/e42acc2d-8462-4fb5-bf0d-d983c0017584/resourceGroups/identity/providers/Microsoft.KeyVault/vaults/cm-identity-kv"
+                    "id": "/subscriptions/d8011108-23b2-40d8-8bc4-1f3f77abe795/resourceGroups/dotnetconf/providers/Microsoft.KeyVault/vaults/cmdeploymentdemo"
                 },
                 "secretName": "sqlAdministratorLogin"
             }
@@ -19,7 +19,7 @@
         "administratorLoginPassword": {
             "reference": {
                 "keyVault": {
-                    "id": "/subscriptions/e42acc2d-8462-4fb5-bf0d-d983c0017584/resourceGroups/identity/providers/Microsoft.KeyVault/vaults/cm-identity-kv"
+                    "id": "/subscriptions/d8011108-23b2-40d8-8bc4-1f3f77abe795/resourceGroups/dotnetconf/providers/Microsoft.KeyVault/vaults/cmdeploymentdemo"
                 },
                 "secretName": "sqlAdministratorLoginPassword"
             }
