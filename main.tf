@@ -5,6 +5,12 @@ terraform {
       version = ">= 2.26"
     }
   }
+  backend "azurerm" {
+    resource_group_name  = "dotnetconf"
+    storage_account_name = "cmterraformdeployment"
+    container_name       = "tfstate"
+    key                  = "prod.terraform.tfstate"
+  }
 }
 
 variable "admin_username" {
