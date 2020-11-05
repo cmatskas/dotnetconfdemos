@@ -37,9 +37,9 @@ jobs:
         id: init
         run: terraform init
 
-      - name: Terrform import
-        id: Import
-        run: terraform import "azurerm_sql_server.cmsqlserver" "/subscriptions/d8011108-23b2-40d8-8bc4-1f3f77abe795/resourceGroups/tf-dotnetconf-demo/providers/Microsoft.Sql/servers/cmdotnetconfsqlsrv" 
+     # - name: Terrform import
+      #  id: Import
+      #  run: terraform import "azurerm_sql_server.cmsqlserver" "/subscriptions/d8011108-23b2-40d8-8bc4-1f3f77abe795/resourceGroups/tf-dotnetconf-demo/providers/Microsoft.Sql/servers/cmdotnetconfsqlsrv" 
 
       - name: Terraform Plan
         id: plan
