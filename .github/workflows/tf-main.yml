@@ -39,9 +39,8 @@ jobs:
 
       - name: Terraform Import
         id: import 
-        run: |
-          terraform import azurerm_sql_server.cmsqlserver /subscriptions/${{secrets.ARM_SUBSCRIPTION_ID}}/resourceGroups/tf-dotnetconf-demo/providers/Microsoft.Sql/servers/cmdotnetconfsqlsrv
-          terraform import azurerm_sql_database.test /subscriptions/${{secrets.ARM_SUBSCRIPTION_ID}}/resourceGroups/tf-dotnetconf-demo/providers/Microsoft.Sql/servers/cmdotnetconfsqlsrv/databases/cmdotnetconfsqldb
+        run: terraform import azurerm_sql_server.cmsqlserver /subscriptions/${{secrets.ARM_SUBSCRIPTION_ID}}/resourceGroups/tf-dotnetconf-demo/providers/Microsoft.Sql/servers/cmdotnetconfsqlsrv
+          #terraform import azurerm_sql_database.test /subscriptions/${{secrets.ARM_SUBSCRIPTION_ID}}/resourceGroups/tf-dotnetconf-demo/providers/Microsoft.Sql/servers/cmdotnetconfsqlsrv/databases/cmdotnetconfsqldb
 
       - name: Terraform Plan
         id: plan
