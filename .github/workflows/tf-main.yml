@@ -40,8 +40,8 @@ jobs:
       - name: Terraform Import
         id: import 
         run: |
-          terraform import "azurerm_sql_server.cmsqlserver" "/subscriptions/${{secrets.ARM_SUBSCRIPTION_ID}}/resourceGroups/tf-dotnetconf-demo/providers/Microsoft.Sql/servers/cmdotnetconfsqlsrv"
-          terraform import "azurerm_sql_database.test" "/subscriptions/${{secrets.ARM_SUBSCRIPTION_ID}}/resourceGroups/tf-dotnetconf-demo/providers/Microsoft.Sql/servers/cmdotnetconfsqlsrv/databases/cmdotnetconfsqldb"
+          terraform import azurerm_sql_server.cmsqlserver /subscriptions/${{secrets.ARM_SUBSCRIPTION_ID}}/resourceGroups/tf-dotnetconf-demo/providers/Microsoft.Sql/servers/cmdotnetconfsqlsrv
+          terraform import azurerm_sql_database.test /subscriptions/${{secrets.ARM_SUBSCRIPTION_ID}}/resourceGroups/tf-dotnetconf-demo/providers/Microsoft.Sql/servers/cmdotnetconfsqlsrv/databases/cmdotnetconfsqldb
 
       - name: Terraform Plan
         id: plan
@@ -52,11 +52,6 @@ jobs:
           ARM_SUBSCRIPTION_ID : ${{secrets.ARM_SUBSCRIPTION_ID}}     
           ARM_TENANT_ID : ${{secrets.ARM_TENANT_ID}}
         continue-on-error: false
-      
-      - name: Echo KV Values
-        run: |
-          echo "${{steps.getKVSecrets.outputs.tf-sql-username}}"
-          echo "${{steps.getKVSecrets.outputs.tf-sql-password}}"
 
       - name: Terraform Apply
         id: apply
