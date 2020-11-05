@@ -36,13 +36,18 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
+        env:
+          ARM_CLIENT_ID : ${{secrets.ARM_CLIENT_ID}}     
+          ARM_CLIENT_SECRET : ${{steps.getKVSecrets.outputs.clientsecret}}
+          ARM_SUBSCRIPTION_ID : ${{secrets.ARM_SUBSCRIPTION_ID}}     
+          ARM_TENANT_ID : ${{secrets.ARM_TENANT_ID}}
 
       - name: Terraform Plan
         id: plan
         run: terraform plan -out="tfplan" -var 'admin_username=${{steps.getKVSecrets.outputs.tf-sql-username}}' -var 'admin_password=${{steps.getKVSecrets.outputs.tf-sql-password}}'
         env:
           ARM_CLIENT_ID : ${{secrets.ARM_CLIENT_ID}}     
-          ARM_CLIENT_SECRET : ${{secrets.ARM_CLIENT_SECRET}}
+          ARM_CLIENT_SECRET : ${{steps.getKVSecrets.outputs.clientsecret}}
           ARM_SUBSCRIPTION_ID : ${{secrets.ARM_SUBSCRIPTION_ID}}     
           ARM_TENANT_ID : ${{secrets.ARM_TENANT_ID}}
         continue-on-error: false
@@ -52,7 +57,7 @@ jobs:
         run: terraform apply "tfplan" --auto-approve -var 'admin_username=${{steps.getKVSecrets.outputs.tf-sql-username}}' -var 'admin_password=${{steps.getKVSecrets.outputs.tf-sql-password}}'
         env:
           ARM_CLIENT_ID : ${{secrets.ARM_CLIENT_ID}}     
-          ARM_CLIENT_SECRET : ${{secrets.ARM_CLIENT_SECRET}}    
+          ARM_CLIENT_SECRET : ${{steps.getKVSecrets.outputs.clientsecret}}    
           ARM_SUBSCRIPTION_ID : ${{secrets.ARM_SUBSCRIPTION_ID}}     
           ARM_TENANT_ID : ${{secrets.ARM_TENANT_ID}}
 
